@@ -1,28 +1,16 @@
-== README
+== Github Stas
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Try to calculate stats of organization repository by data from github api.
+Feature for now:
+- Count total comments of user in each repository and all organization repositories
+- Find comments that have no reply
 
-Things you may want to cover:
+Feel free to request what you need to calculate.
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+If you want to run this project in your machine, remmeber to run tasks to get data from github
+1. Generate a token in https://github.com/settings/applications
+2. Update github_token.yml with the generated token and organization name (EastAgile)
+3. Pull repositories from github: 
+  rake github:update_repositories
+4. Pull comments from github: 
+  rake github:update_comments
