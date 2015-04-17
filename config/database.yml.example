@@ -1,0 +1,22 @@
+development:
+  adapter: postgresql
+  encoding: utf8
+  database: github_analize_dev
+  timeout: 5000
+  username: username
+
+test:
+  adapter: postgresql
+  encoding: utf8
+  database: github_analize_test
+  host: localhost
+  timeout: 5000
+  username: username
+
+production:
+  adapter: postgresql
+  encoding: utf8
+  database: github_analize
+  timeout: 5000
+  username: username
+
