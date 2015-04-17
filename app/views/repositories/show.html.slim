@@ -1,0 +1,13 @@
+h1= @repo.name
+
+h3 User comments count
+ul
+  - @order_by_comment_count.each do |key, value|
+    li= "#{key} - #{value}"
+
+h3 No reply Comments
+ul
+  - @no_repply_comments.each do |comment|
+    li= link_to "#{comment.username} - #{time_ago_in_words comment.posted_at}", comment.raw_data.to_hash[:html_url]
+
+
