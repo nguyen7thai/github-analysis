@@ -25,7 +25,7 @@ module DataFetch
         username:  params[:user][:login],
         body:      params[:body],
         posted_at: params[:created_at],
-        line:      params[:line],
+        line:      params[:position] || params[:line],
         position:  params[:original_position],
         commit_id: params[:commit_id],
         file_path: params[:path],
