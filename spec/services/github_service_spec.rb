@@ -7,7 +7,7 @@ describe GithubService do
 
   describe '#get_org_repos' do
     it 'should call org_repos with organization name' do
-      expect(GithubService).to receive(:org_repos).with(ORGANIZATION)
+      expect(GithubService).to receive(:org_repos).with(ORGANIZATION, {})
       GithubService.get_org_repos
     end
   end

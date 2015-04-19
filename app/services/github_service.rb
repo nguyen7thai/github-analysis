@@ -10,11 +10,11 @@ class << GithubService
     self.pull_requests_comments(repo, options) + self.list_commit_comments(repo, options)
   end
 
-  def get_org_repos
-    org_repos ORGANIZATION
+  def get_org_repos options = {}
+    org_repos ORGANIZATION, options
   end
 
-  def single_commit repo, sha
+  def single_commit repo, sha, options = {}
     commit org_repo_name(repo), sha
   end
 

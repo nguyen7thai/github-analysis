@@ -1,9 +1,9 @@
 module DataFetch
   class CommitFetch
-    include ServiceFetch
+    include FetchService
 
-    def fetch repo, sha
-      github_commit = @github_service.single_commit repo.name, sha
+    def fetch repo, sha, options = {}
+      github_commit = @github_service.single_commit repo.name, sha, options
 
       repo.commits.create(
         sha: sha,

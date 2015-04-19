@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150416004945) do
+ActiveRecord::Schema.define(version: 20150417093302) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -46,6 +46,16 @@ ActiveRecord::Schema.define(version: 20150416004945) do
   add_index "commits", ["committer"], name: "index_commits_on_committer", using: :btree
   add_index "commits", ["repository_id"], name: "index_commits_on_repository_id", using: :btree
   add_index "commits", ["sha"], name: "index_commits_on_sha", using: :btree
+
+  create_table "fetch_histories", force: :cascade do |t|
+    t.string   "fetch_type"
+    t.string   "status"
+    t.datetime "finished_at"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "fetch_histories", ["fetch_type"], name: "index_fetch_histories_on_fetch_type", using: :btree
 
   create_table "repositories", force: :cascade do |t|
     t.string   "github_id"

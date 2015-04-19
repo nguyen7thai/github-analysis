@@ -1,6 +1,6 @@
 module DataFetch
   class CommentFetch
-    include ServiceFetch
+    include FetchService
 
     def fetch repo, options = {}
       github_comments = @github_service.repo_comments repo.name, options
@@ -28,6 +28,7 @@ module DataFetch
         line:      params[:line],
         position:  params[:original_position],
         commit_id: params[:commit_id],
+        file_path: params[:path],
         raw_data:  params
       )
     end
