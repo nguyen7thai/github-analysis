@@ -16,6 +16,10 @@ module RuboCop
       new(File.read(path), path)
     end
 
+    def self.from_raw_file(raw_file, path)
+      new(raw_file, path)
+    end
+
     def initialize(source, path = nil)
       # In Ruby 2, source code encoding defaults to UTF-8. We follow the same
       # principle regardless of which Ruby version we're running under.

@@ -33,6 +33,16 @@ gem 'factory_girl_rails'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
+# Gems to review the code
+gem 'rubocop', path: 'gems/rubocop-0.30.0'
+gem 'rails_best_practices'
+
+# This is the ENEMY, but i think i am better
+# gem 'pronto'
+# gem 'pronto-rubocop', require: false
+# gem 'pronto-scss', require: false
+# gem 'pronto-rails_best_practices', require: false
+
 group :development, :test do
   gem 'byebug'
   gem 'web-console', '~> 2.0'

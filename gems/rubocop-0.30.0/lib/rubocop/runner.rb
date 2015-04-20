@@ -30,6 +30,10 @@ module RuboCop
       inspect_files(target_files)
     end
 
+    def run_raw_file(file, path = nil)
+      inspect_files([file], path)
+    end
+
     def abort
       @aborting = true
     end
@@ -42,36 +46,34 @@ module RuboCop
       target_files.each(&:freeze).freeze
     end
 
-    def inspect_files(files)
+    def inspect_files(files, path = nil)
       inspected_files = []
       all_passed = true
 
       formatter_set.started(files)
-
+      offenses = []
       files.each do |file|
         break if aborting?
-        offenses = process_file(file)
+        offenses = process_file(file, path)
         all_passed = false if offenses.any? { |o| considered_failure?(o) }
         inspected_files << file
         break if @options[:fail_fast] && !all_passed
       end
 
-      all_passed
+      offenses
     ensure
       formatter_set.finished(inspected_files.freeze)
       formatter_set.close_output_files
     end
 
-    def process_file(file)
+    def process_file(file, path = nil)
       puts "Scanning #{file}" if @options[:debug]
+      processed_source = path ? ProcessedSource.from_raw_file(file, path) : ProcessedSource.from_file(file)
+      # formatter_set.file_started(file, file_info(processed_source))
 
-      processed_source = ProcessedSource.from_file(file)
+      offenses = do_inspection_loop(file, processed_source, path)
 
-      formatter_set.file_started(file, file_info(processed_source))
-
-      offenses = do_inspection_loop(file, processed_source)
-
-      formatter_set.file_finished(file, offenses.compact.sort.freeze)
+      # formatter_set.file_finished(file, offenses.compact.sort.freeze)
 
       offenses
     rescue InfiniteCorrectionLoop => e
@@ -79,7 +81,7 @@ module RuboCop
       raise
     end
 
-    def do_inspection_loop(file, processed_source)
+    def do_inspection_loop(file, processed_source, path = nil)
       offenses = []
 
       # Keep track of the state of the source. If a cop modifies the source
@@ -105,7 +107,7 @@ module RuboCop
         # loop if we find any.
         break unless updated_source_file
 
-        processed_source = ProcessedSource.from_file(file)
+        processed_source = ProcessedSource.from_raw_file(file, path)
       end
 
       offenses
