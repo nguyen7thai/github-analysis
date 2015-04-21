@@ -1,0 +1,5 @@
+h3= @repository.name
+
+ul
+  - @commits.each do |commit|
+    li= link_to "#{time_ago_in_words commit.committed_at} - #{commit.sha}", commit_path(commit)

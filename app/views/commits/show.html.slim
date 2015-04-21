@@ -1,0 +1,12 @@
+h1 Review result
+
+- @results.each do |filename, result|
+  p
+    strong= filename
+  p
+    ul
+      - result.each do |review|
+        li
+          = "Line - #{review.location.line}"
+          br
+          = review.message

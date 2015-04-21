@@ -1,5 +1,7 @@
 h1= @repo.name
 
+h4= link_to 'Repo Commits', repository_commits_path(repository_id: @repo.id)
+
 h3 User comments count
 ul
   - @order_by_comment_count.each do |key, value|
