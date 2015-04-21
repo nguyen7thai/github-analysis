@@ -18,6 +18,10 @@ class << GithubService
     commit org_repo_name(repo), sha
   end
 
+  def file_raw_content repo, sha, file_name
+    contents org_repo_name(repo), { ref: sha, path: file_name, accept: 'application/vnd.github.raw' }
+  end
+
   private
   def org_repo_name repo
     "#{ORGANIZATION}/#{repo}"
