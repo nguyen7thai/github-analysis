@@ -34,7 +34,7 @@ gem 'factory_girl_rails'
 # gem 'capistrano-rails', group: :development
 
 # Gems to review the code
-gem 'rubocop', path: 'gems/rubocop-0.30.0'
+gem 'rubocop'
 gem 'rails_best_practices'
 
 # This is the ENEMY, but i think i am better
