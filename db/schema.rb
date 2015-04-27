@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150418152356) do
+ActiveRecord::Schema.define(version: 20150427042702) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -65,5 +65,18 @@ ActiveRecord::Schema.define(version: 20150418152356) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  create_table "users", force: :cascade do |t|
+    t.string   "username"
+    t.string   "encrypted_password"
+    t.string   "authentication_token"
+    t.integer  "repository_id"
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+  end
+
+  add_index "users", ["repository_id"], name: "index_users_on_repository_id", using: :btree
+  add_index "users", ["username", "encrypted_password"], name: "index_users_on_username_and_encrypted_password", using: :btree
+  add_index "users", ["username"], name: "index_users_on_username", using: :btree
 
 end
