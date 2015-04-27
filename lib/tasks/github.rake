@@ -6,9 +6,6 @@ namespace :github do
 
   desc "Pull comments with commits data from github"
   task :update_comments => :environment do |t|
-    Repository.includes(:comments).each do |repo|
-      p "Update comments for #{repo.name}"
-      DataFetch::CommentFetch.call repo, {}
-    end
+    DataFetch::AllReposCommentFetch.schedule_call({})
   end
 end
