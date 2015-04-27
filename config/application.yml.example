@@ -1,0 +1,3 @@
+github_token: github_token
+github_organization: 'EastAgile'
+SECRET_KEY_BASE: key
