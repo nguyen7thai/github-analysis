@@ -5,7 +5,9 @@ Rails.application.routes.draw do
     resources :commits, only: [:index]
   end
 
-  resources :commits, only: [:show]
+  resources :commits, only: [:show] do
+    resources :constructive_spams, only: [:create]
+  end
 
   resources :comments, only: [:index]
 end

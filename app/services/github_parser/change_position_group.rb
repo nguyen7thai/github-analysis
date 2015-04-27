@@ -1,6 +1,6 @@
 module GithubParser
   class ChangePositionGroup
-    def initialize(string)
+    def initialize string
       position = string.delete('@@').strip
       changes = position.split(' ')
       @removed_lines = ChangePosition.new(changes.first)

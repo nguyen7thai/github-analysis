@@ -1,5 +1,4 @@
 class CommentsController < ApplicationController
-
   def index
     @comment_analytics = Analytics::CommentCount.new(get_comments).call
   end

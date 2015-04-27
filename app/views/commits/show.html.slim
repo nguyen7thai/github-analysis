@@ -1,4 +1,5 @@
 h1 Review result
+p= link_to 'Push comments to github', '#', id: 'push-comment-link', data: { url: commit_constructive_spams_path(commit_id: @commit.id) }
 
 - @results.each do |filename, result|
   p
@@ -7,6 +8,6 @@ h1 Review result
     ul
       - result.each do |review|
         li
-          = "Line - #{review.location.line}"
+          = "Line: #{review.location.line} - Position Index: #{review.position_index}"
           br
           = review.message
