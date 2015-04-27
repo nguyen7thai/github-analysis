@@ -8,9 +8,7 @@ Try to calculate stats of organization repository by data from github api.
 Feature for now:
 - Count total comments of user in each repository and all organization repositories
 - Find comments that have no reply
-- Auto comment tool: Current, i just integrated RuboCop as the review tool (there will be more, such as rails_best_practices and
-other front end libraries). Because the feature is just beta testing, i show the review results in web page with a 
-button to manually push the review to the commit in github.
+- Auto comment tool: Current, i just integrated RuboCop as the review tool (there will be more, such as rails_best_practices and other front end libraries). Because the feature is just beta testing, i show the review results in web page with a button to manually push the review to the commit in github.
 - Api server
 
 Feel free to request what you need to calculate.
@@ -24,12 +22,8 @@ If you want to run this project in your machine, remmeber to run tasks to get da
   rake github:update_comments
   
 ** Currently, i pull the data manually by running the rake tasks because of the limitation of free acount in heroku.
+
 Need Contributors:
-- I saw that there are some people in our company that are interested in AngularJs, i am now converting the app to
-a backend server, and there will be an angular web app soon (with basic structures). You can come there and share your
-knowledge about this JS framework. There are pulled data in database, just extract and
-analize what you want.
-- If any of you interested in the auto review tool, you can add more Tools to the application, here is the suggested list:
-rails_best_practices, brakeman, jslint, coffelint ... I got this list from gem pronto, they also have the auto review tool,
-but work differently from our application.
+- I saw that there are some people in our company that are interested in AngularJs, i am now converting the app to a backend server, and there will be an angular web app soon (with basic structures). You can come there and share your knowledge about this JS framework. There are pulled data in database, just extract and analize what you want.
+- If any of you interested in the auto review tool, you can add more Tools to the application, here is the suggested list: rails_best_practices, brakeman, jslint, coffelint ... I got this list from gem pronto, they also have the auto review tool, but work differently from our application.
 
