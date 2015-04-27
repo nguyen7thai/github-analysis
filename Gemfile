@@ -25,7 +25,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'slim'
 
 # User to query api from github
-gem "octokit"
+gem "octokit", git: 'git://github.com/octokit/octokit.rb', branch: 'master'
 
 # prepare test data
 gem 'factory_girl_rails'
