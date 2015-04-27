@@ -1,3 +1,4 @@
+= link_to 'All comments count', comments_path
 ol
   - @list_repos.each do |repo|
     li= link_to repo.name, repository_path(repo)
