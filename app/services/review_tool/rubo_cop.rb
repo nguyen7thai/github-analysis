@@ -15,7 +15,6 @@ module ReviewTool
       processed_source = ::RuboCop::ProcessedSource.new(file, path)
       do_inspection_loop(file, processed_source, path)
     rescue InfiniteCorrectionLoop => e
-      formatter_set.file_finished(file, e.offenses.compact.sort.freeze)
       raise
     end
 
@@ -32,6 +31,17 @@ module ReviewTool
         processed_source = ::RuboCop::ProcessedSource.new(file, path)
       end
       offenses
+    end
+  end
+
+  class ResultDecorator < SimpleDelegator
+    def initialize(result, position_block)
+      @block = position_block
+      super(result)
+    end
+
+    def position_index
+      @block.call(self.line)
     end
   end
 end

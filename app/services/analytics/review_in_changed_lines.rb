@@ -11,8 +11,7 @@ module Analytics
       review_results = CommitReview.new(@commit).call
       @commit.changed_files.each do |file|
         file.to_h[:filename]
-        positions = GithubParser::PatchParser.new(file.to_h[:patch]).line_of_changes
-        added_lines = positions.map { |position| position[1].lines }
+        added_lines = GithubParser::PatchParser.new(file.to_h[:patch]).added_lines
         review_results[file].select! { |change| added_lines.includes? change.line }
       end
       review_results

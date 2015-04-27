@@ -6,3 +6,10 @@ Documentation:
 
 Style/StringLiterals:
   Enabled: false
+
+Metrics/MethodLength:
+  CountComments: false
+  Max: 20
+
+Metrics/AbcSize:
+  Max: 20

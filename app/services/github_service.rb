@@ -22,6 +22,13 @@ class << GithubService
     contents org_repo_name(repo), { ref: sha, path: file_name, accept: 'application/vnd.github.raw' }
   end
 
+  def commit_comment repo, sha, file_name, review_result
+    position = review_result.position_index
+    body = review_result.message + "\n -- Auto comment --"
+    repo = org_repo_name(repo)
+    create_commit_comment repo, sha, body, file_name, nil, position
+  end
+
   private
   def org_repo_name repo
     "#{ORGANIZATION}/#{repo}"

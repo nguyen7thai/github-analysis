@@ -15,8 +15,9 @@ module Analytics
 
         if check_file? file.to_h[:filename]
           p "Running review for #{file_name}"
-          results = process_review_file file_name
-          hash[file_name] = remove_review_results_not_in_commit file, results
+          rubo_cop_results = process_review_file file_name
+          review_results = remove_review_results_not_in_commit file, rubo_cop_results
+          hash[file_name] = transform_results file, review_results
         else
           p "Skip reviewing for #{file_name}"
         end
@@ -31,12 +32,21 @@ module Analytics
 
     def process_review_file file_name
       file_content = GithubService.file_raw_content @commit.repository.name, @commit.sha, file_name
-      RuboCop::Runner.new({}, RuboCop::ConfigStore.new).run_raw_file(file_content, file_name)
+      ::ReviewTool::RuboCop.run(file_content, file_name)
     end
 
     def remove_review_results_not_in_commit file, review_results
       added_lines = GithubParser::PatchParser.new(file.to_h[:patch]).added_lines
       review_results.select { |result| added_lines.include? result.line.to_i }
+    end
+
+    def transform_results file, review_results
+      patch_parser = GithubParser::PatchParser.new(file.to_h[:patch])
+      proc = Proc.new { |line| patch_parser.find_index_for_line(line) }
+
+      review_results.map do |result|
+        ::ReviewTool::ResultDecorator.new result, proc
+      end
     end
   end
 end
