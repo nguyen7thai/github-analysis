@@ -1,6 +1,6 @@
 Octokit.auto_paginate = true
-GithubService = Octokit::Client.new(access_token: GITHUB_TOKEN[:token])
-ORGANIZATION = GITHUB_TOKEN[:organization] || 'EastAgile'
+GithubService = Octokit::Client.new(access_token: GITHUB_TOKEN)
+ORGANIZATION = GITHUB_ORGANIZATION || 'EastAgile'
 
 class << GithubService
   # Just get 2 type of comment: pull request comments and commit comments

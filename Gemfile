@@ -46,6 +46,9 @@ gem 'rails_best_practices'
 # For serializer
 gem 'active_model_serializers'
 
+# Manage environment variables
+gem 'figaro'
+
 group :development, :test do
   gem 'byebug'
   gem 'web-console', '~> 2.0'
