@@ -8,7 +8,7 @@ namespace :github do
   task :update_comments => :environment do |t|
     Repository.includes(:comments).each do |repo|
       p "Update comments for #{repo.name}"
-      DataFetch::CommentFetch.schedule_call repo
+      DataFetch::CommentFetch.schedule_call repo, {}
     end
   end
 end
