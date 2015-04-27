@@ -22,6 +22,7 @@ module GithubApi
 
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.eager_load_paths << "#{Rails.root}/app/services/"
+    config.eager_load_paths << "#{Rails.root}/app/serializers/"
     config.active_record.raise_in_transactional_callbacks = true
   end
 end

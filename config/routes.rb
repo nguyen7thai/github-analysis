@@ -10,4 +10,11 @@ Rails.application.routes.draw do
   end
 
   resources :comments, only: [:index]
+
+  namespace :api do
+    namespace :v1 do
+      resources :repositories, only: [:index]
+      resources :sessions, only: [:create]
+    end
+  end
 end
