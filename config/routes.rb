@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root 'repositories#index'
+  root 'sessions#new'
 
   resources :repositories, only: [:index, :show] do
     resources :commits, only: [:index]
@@ -8,6 +8,8 @@ Rails.application.routes.draw do
   resources :commits, only: [:show] do
     resources :constructive_spams, only: [:create]
   end
+
+  resources :sessions, only: [:new, :create]
 
   resources :comments, only: [:index]
 

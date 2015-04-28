@@ -1,4 +1,6 @@
 class CommentsController < ApplicationController
+  before_action :require_logged_in
+
   def index
     @comment_analytics = Analytics::CommentCount.new(get_comments).call
   end

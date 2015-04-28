@@ -1,4 +1,6 @@
 class RepositoriesController < ApplicationController
+  before_action :require_logged_in
+
   def index
     @list_repos = Repository.order(:name)
   end
