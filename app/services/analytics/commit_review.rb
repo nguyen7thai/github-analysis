@@ -18,11 +18,10 @@ module Analytics
           begin
             rubo_cop_results = process_review_file file_name
             review_results = remove_review_results_not_in_commit file, rubo_cop_results
+            hash[file_name] = transform_results file, review_results if review_results.present?
           rescue Octokit::NotFound
-            review_results = []
             p "Find not found: #{file_name}"
           end
-          hash[file_name] = transform_results file, review_results
         else
           p "Skip reviewing for #{file_name}"
         end
