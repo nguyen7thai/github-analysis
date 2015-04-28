@@ -1,6 +1,6 @@
 class RepositoriesController < ApplicationController
   def index
-    @list_repos = Repository.all
+    @list_repos = Repository.order(:name)
   end
 
   def show
