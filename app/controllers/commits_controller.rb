@@ -8,6 +8,7 @@ class CommitsController < ApplicationController
 
   def show
     @commit = Commit.find(params[:id])
-    @results = Analytics::CommitReview.new(@commit).call
+    @results = []
+    # @results = Analytics::CommitReview.new(@commit).call
   end
 end

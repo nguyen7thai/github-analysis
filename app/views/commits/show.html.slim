@@ -1,6 +1,17 @@
 h1 Review result
 p= link_to 'Push comments to github (Disabled on production)', '#', id: 'push-comment-link-disabled', data: { url: commit_constructive_spams_path(commit_id: @commit.id) }
 
+p
+  p Commit author (from github api)
+  p= "Email: #{@commit.author[:email]}"
+  p= "Name: #{@commit.author[:name]}"
+p
+  | Commit author (analyzing)
+  ul
+    - @commit.github_accounts.each do |account|
+      li= account.email
+
+
 - @results.each do |filename, result|
   p
     strong= filename

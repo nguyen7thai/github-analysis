@@ -13,6 +13,8 @@ Rails.application.routes.draw do
 
   resources :comments, only: [:index]
 
+  resources :github_accounts
+
   namespace :api do
     namespace :v1 do
       resources :repositories, only: [:index]

@@ -27,7 +27,6 @@ module DataFetch
         posted_at: params[:created_at],
         line:      params[:position] || params[:line],
         position:  params[:original_position],
-        commit_id: params[:commit_id],
         file_path: params[:path],
         raw_data:  params
       )

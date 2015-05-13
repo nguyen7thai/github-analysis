@@ -29,6 +29,10 @@ class << GithubService
     create_commit_comment repo, sha, body, file_name, nil, position
   end
 
+  def all_members
+    organization_members ORGANIZATION
+  end
+
   private
   def org_repo_name repo
     "#{ORGANIZATION}/#{repo}"

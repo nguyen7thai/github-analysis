@@ -5,12 +5,18 @@ class FetchHistory < ActiveRecord::Base
     STARTED = 'Started',
   ]
 
+  scope :success, -> { where(status: SUCCESS) }
+
   def self.start_fetching type
     create(fetch_type: type, status: STARTED)
   end
 
   def self.last_fetch type
-    FetchHistory.where(fetch_type: type, status: SUCCESS).order(finished_at: :desc).first
+    FetchHistory.success.where(fetch_type: type).order(finished_at: :desc).first
+  end
+
+  def self.last_all_comments_fetch
+    success.where(fetch_type: 'DataFetch::AllReposCommentFetch').last
   end
 
   def mark_as_success

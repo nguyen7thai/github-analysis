@@ -51,6 +51,8 @@ gem 'figaro'
 
 gem 'jquery-ui-rails'
 
+gem 'squeel'
+
 group :development, :test do
   gem 'byebug'
   gem 'web-console', '~> 2.0'

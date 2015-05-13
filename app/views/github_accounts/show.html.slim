@@ -1,0 +1,8 @@
+ol
+  - @comments.each do |comment|
+    li
+      = "#{comment.id} - #{comment.body} "
+      - if comment.commit
+        = link_to 'commit', comment.commit.raw_data.to_h[:html_url]
+
+

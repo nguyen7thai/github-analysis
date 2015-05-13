@@ -10,7 +10,9 @@ module DataFetch
         committer: github_commit[:committer].try(:fetch, :login) || github_commit[:commit][:committer][:email],
         committed_at: github_commit[:commit][:committer][:date],
         raw_data: github_commit
-      )
+      ).tap do |commit|
+        Analytics::FindCommitAuthor.new(commit).call
+      end
     end
   end
 end

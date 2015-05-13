@@ -13,6 +13,8 @@ class CommentsController < ApplicationController
       @nocomment_people = people_list - comments.pluck(:username)
     end
     @comment_analytics = Analytics::CommentCount.new(comments).call
+    @review_comment_analytics = Analytics::ReviewCommentCount.new(comments).call
+    @last_fetch = FetchHistory.last_all_comments_fetch
   end
 
   private

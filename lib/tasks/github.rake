@@ -8,4 +8,12 @@ namespace :github do
   task :update_comments => :environment do |t|
     DataFetch::AllReposCommentFetch.schedule_call({})
   end
+
+  desc "Update author for commit"
+  task :update_commit_author => :environment do |t|
+    Commit.find_each do |commit|
+      Analytics::FindCommitAuthor.new(commit).call
+    end
+  end
 end
+

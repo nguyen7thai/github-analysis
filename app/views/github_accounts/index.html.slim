@@ -1,0 +1,10 @@
+ol
+  - @github_accounts.each do |account|
+    li
+      p
+        | Username:
+        = account.username
+      p
+        | Email:
+        = account.email
+      p= link_to 'Edit', edit_github_account_path(account)

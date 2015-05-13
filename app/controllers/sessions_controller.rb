@@ -1,6 +1,6 @@
 class SessionsController < ApplicationController
-  USERNAME = 'eastagile'
-  PASSWORD = 'r,H+1,kea'
+  USERNAME = ENV['login_username']
+  PASSWORD = ENV['login_password']
 
   def new
   end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150427042702) do
+ActiveRecord::Schema.define(version: 20150515003149) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,12 +26,14 @@ ActiveRecord::Schema.define(version: 20150427042702) do
     t.integer  "position"
     t.integer  "commit_id"
     t.integer  "repository_id"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
     t.string   "file_path"
+    t.integer  "github_account_id"
   end
 
   add_index "comments", ["commit_id"], name: "index_comments_on_commit_id", using: :btree
+  add_index "comments", ["github_account_id"], name: "index_comments_on_github_account_id", using: :btree
   add_index "comments", ["repository_id"], name: "index_comments_on_repository_id", using: :btree
 
   create_table "commits", force: :cascade do |t|
@@ -48,6 +50,15 @@ ActiveRecord::Schema.define(version: 20150427042702) do
   add_index "commits", ["repository_id"], name: "index_commits_on_repository_id", using: :btree
   add_index "commits", ["sha"], name: "index_commits_on_sha", using: :btree
 
+  create_table "commits_github_accounts", force: :cascade do |t|
+    t.integer  "commit_id"
+    t.integer  "github_account_id"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+  end
+
+  add_index "commits_github_accounts", ["commit_id", "github_account_id"], name: "commits_github_accounts_index", using: :btree
+
   create_table "fetch_histories", force: :cascade do |t|
     t.string   "fetch_type"
     t.string   "status"
@@ -57,6 +68,19 @@ ActiveRecord::Schema.define(version: 20150427042702) do
   end
 
   add_index "fetch_histories", ["fetch_type"], name: "index_fetch_histories_on_fetch_type", using: :btree
+
+  create_table "github_accounts", force: :cascade do |t|
+    t.string   "username"
+    t.string   "email"
+    t.string   "github_id"
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "github_accounts", ["email"], name: "index_github_accounts_on_email", using: :btree
+  add_index "github_accounts", ["name"], name: "index_github_accounts_on_name", using: :btree
+  add_index "github_accounts", ["username"], name: "index_github_accounts_on_username", using: :btree
 
   create_table "repositories", force: :cascade do |t|
     t.string   "github_id"
@@ -79,4 +103,9 @@ ActiveRecord::Schema.define(version: 20150427042702) do
   add_index "users", ["username", "encrypted_password"], name: "index_users_on_username_and_encrypted_password", using: :btree
   add_index "users", ["username"], name: "index_users_on_username", using: :btree
 
+  add_foreign_key "comments", "commits"
+  add_foreign_key "comments", "github_accounts"
+  add_foreign_key "comments", "repositories"
+  add_foreign_key "commits_github_accounts", "commits"
+  add_foreign_key "commits_github_accounts", "github_accounts"
 end
