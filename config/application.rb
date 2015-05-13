@@ -24,5 +24,13 @@ module GithubApi
     config.eager_load_paths << "#{Rails.root}/app/services/"
     config.eager_load_paths << "#{Rails.root}/app/serializers/"
     config.active_record.raise_in_transactional_callbacks = true
+
+    # Config Cors to allow all domains
+    config.middleware.insert_before 0, "Rack::Cors" do
+      allow do
+        origins '*'
+        resource '*', :headers => :any, :methods => [:get, :post, :options]
+      end
+    end
   end
 end

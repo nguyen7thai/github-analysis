@@ -15,7 +15,7 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v1 do
-      resources :repositories, only: [:index]
+      resources :repositories, only: [:index, :show]
       resources :sessions, only: [:create]
     end
   end

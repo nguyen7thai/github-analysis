@@ -1,8 +1,6 @@
 require 'digest/sha1'
 
 class User < ActiveRecord::Base
-  before_create :generate_authentication_token
-
   def password= password
     self.encrypted_password = Digest::SHA1.hexdigest(password)
   end
@@ -17,6 +15,7 @@ class User < ActiveRecord::Base
   end
 
   def generate_authentication_token
-    self.authentication_token = SecureRandom.base64(64)
+    payload = { user_id: self.id, username: self.username }
+    Auth::AuthToken.encode(payload)
   end
 end

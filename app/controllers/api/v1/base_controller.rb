@@ -5,10 +5,17 @@ module Api
 
       def authenticate_user!
         token, options = ActionController::HttpAuthentication::Token.token_and_options(request)
-        if options && (username = options[:username])
-          @current_user = User.find_by(username: username, authentication_token: token)
-        end
 
+        begin
+          payload = Auth::AuthToken.decode(token)
+          if payload[:exp] > Time.now.to_i
+            @current_user = User.find_by(username: payload[:username])
+          else
+            return render json: { message: 'Token expired' }, status: :unauthorized
+          end
+        rescue
+          p 'Token Decode failed'
+        end
         unauthenticate! unless @current_user
       end
 

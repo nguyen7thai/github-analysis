@@ -49,7 +49,14 @@ gem 'active_model_serializers'
 # Manage environment variables
 gem 'figaro'
 
+# JSON web token
+gem 'jwt'
+
+# Jquery
 gem 'jquery-ui-rails'
+
+# I'm too lazy with original active records queries
+gem 'squeel'
 
 group :development, :test do
   gem 'byebug'
@@ -58,4 +65,7 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'shoulda-matchers'
   gem 'faker'
+  # Solving cross domain problem
+  # Will be moved to production soon
+  gem 'rack-cors', :require => 'rack/cors'
 end
